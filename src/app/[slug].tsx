@@ -1,8 +1,15 @@
 import { View, Text, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { getPost } from '../repository/postRepository';
+import { getAllPosts, getPost } from '../repository/postRepository';
 import Markdown from 'react-native-markdown-display';
+
+export async function generateStaticParams(): Promise<
+  Record<string, string>[]
+> {
+  const posts = getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 const PostDetailsPage = () => {
   const { slug } = useLocalSearchParams();
@@ -25,7 +32,7 @@ const PostDetailsPage = () => {
         padding: 20,
       }}
     >
-      {/* <Stack.Screen options={{ title: post.title }} /> */}
+      <Stack.Screen options={{ title: post.title }} />
       <Text>{post.title}</Text>
       <Markdown>{post.content}</Markdown>
     </ScrollView>
