@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    // justifyContent: 'center',
     maxWidth: 960,
+    width: '100%',
     marginHorizontal: 'auto',
   },
 });
